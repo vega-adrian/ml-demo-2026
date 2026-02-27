@@ -1,0 +1,1 @@
+CLASS_NAMES = ['setosa', 'versicolor', 'virginica']

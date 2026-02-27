@@ -12,6 +12,16 @@ dependencies = [
 ]
 
 
+[tol.poetry]
+package-mode = false
+
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.serve.dependencies]
+fastapi = "^0.133.1"
+uvicorn = "^0.41.0"
+pydantic = "^2.12.5"
+
