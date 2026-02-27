@@ -14,7 +14,7 @@ steps:
     args: [
       "build",
       "-t",
-      "europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-api",
+      "europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-api:latest",
       "-f",
       "src/serve/Dockerfile",
       "."
@@ -26,6 +26,29 @@ steps:
       "push",
       "europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-api",
       "--all-tags"
+    ]
+
+  - id: 'Deploy'
+    name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      "run",
+      "deploy",
+      "ml-demo-api",
+      "--image="europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-api:latest",
+      "--region=europe-west1",
+      "--allow-unauthenticated",
+      "--project=$PROJECT_ID"
+    ]
+
+  - id: 'Update traffic'
+    name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      "run",
+      "services",
+      "update-traffic",
+      "ml-demo-api",
+      "--region=europe-west1",
+      "--to-latest"
     ]
 
 
