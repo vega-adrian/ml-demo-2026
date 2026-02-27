@@ -16,4 +16,4 @@ RUN mkdir /app/artifacts/models
 COPY artifacts/models/model.pkl /app/artifacts/models/
 COPY src/serve /app/src/serve
 
-CMD ["python", "src/serve/main.py"]
+CMD ["poetry", "run", "python", "src/serve/main.py"]
