@@ -1,0 +1,29 @@
+steps:
+  - id: 'Pull model'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: /bin/bash
+    args: [
+      "gsutil",
+      "cp",
+      "gs://ml-models-uem-2026-avega/ml-demo/model.pkl",
+      "artifacts/models/model.pkl"
+    ]
+
+  - id: 'Build image'
+    name: 'gcr.io/cloud-builders/docker'
+    args: [
+      "build",
+      "-t",
+      "europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-api",
+      "-f",
+      "src/serve/Dockerfile",
+      "."
+    ]
+
+  - id: 'Push image'
+    name: 'gcr.io/cloud-builders/docker'
+    args: [
+      "push",
+      "europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-api",
+      "--all-tags"
+    ]
