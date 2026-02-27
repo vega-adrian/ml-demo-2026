@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 
-[tol.poetry]
+[tool.poetry]
 package-mode = false
 
 
