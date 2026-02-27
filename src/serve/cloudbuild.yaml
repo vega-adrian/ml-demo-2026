@@ -27,3 +27,7 @@ steps:
       "europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-api",
       "--all-tags"
     ]
+
+
+options:
+  logging: CLOUD_LOGGING_ONLY
