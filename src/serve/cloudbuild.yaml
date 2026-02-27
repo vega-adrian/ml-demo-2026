@@ -34,7 +34,7 @@ steps:
       "run",
       "deploy",
       "ml-demo-api",
-      "--image="europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-api:latest",
+      "--image=europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-api:latest",
       "--region=europe-west1",
       "--allow-unauthenticated",
       "--project=$PROJECT_ID"
