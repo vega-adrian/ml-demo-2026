@@ -50,7 +50,9 @@ class DemoModel:
         X,
         y,
     ):
+        print('Fitting model')
         self.pipeline.fit(X, y)
+        print('Model fitted')
         self.is_trained = True
 
     def evaluate(self, X, y):
@@ -90,6 +92,5 @@ class DemoModel:
 if __name__ == '__main__':
     model = DemoModel(random_state=0)
     X_train, X_test, y_train, y_test = model.load_data()
-    print(X_train)
-    # model.fit(X_train, y_train)
-    # model.save('artifacts/models/model.pkl')
+    model.fit(X_train, y_train)
+    model.save('artifacts/models/model.pkl')
