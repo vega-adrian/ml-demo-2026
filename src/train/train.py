@@ -8,6 +8,12 @@ from sklearn.metrics import accuracy_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+from gcs_io import upload_to_gcs
+
+if os.getenv('ENV', 'local') == 'local':
+    from dotenv import load_dotenv
+    load_dotenv()
+
 
 class DemoModel:
     def __init__(
@@ -67,6 +73,12 @@ class DemoModel:
 
         with open(path, 'wb') as f:
             pickle.dump(self.pipeline, f)
+
+        upload_to_gcs(
+            local_file_path=path,
+            bucket_name=os.getenv('BUCKET_NAME'),
+            destination=os.getenv('DESTINATION_BLOB'),
+        )
 
     def load(self, path: str):
         with open(path, 'rb') as f:

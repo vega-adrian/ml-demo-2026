@@ -34,3 +34,7 @@ requests = "^2.32.5"
 [tool.poetry.group.local.dependencies]
 python-dotenv = "^1.2.1"
 
+
+[tool.poetry.group.train.dependencies]
+google-cloud-storage = "^3.9.0"
+

@@ -1,0 +1,24 @@
+steps:
+
+  - id: 'Build image'
+    name: 'gcr.io/cloud-builders/docker'
+    args: [
+      "build",
+      "-t",
+      "europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-train-job:latest",
+      "-f",
+      "src/serve/Dockerfile",
+      "."
+    ]
+
+  - id: 'Push image'
+    name: 'gcr.io/cloud-builders/docker'
+    args: [
+      "push",
+      "europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-train-job",
+      "--all-tags"
+    ]
+
+
+options:
+  logging: CLOUD_LOGGING_ONLY

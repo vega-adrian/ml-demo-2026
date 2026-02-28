@@ -7,13 +7,12 @@ RUN pip install poetry
 COPY poetry.lock /app
 COPY pyproject.toml /app
 
-RUN poetry install --without local,test,train
+RUN poetry install --without local,test,serve
 
 RUN mkdir /app/src
 RUN mkdir /app/artifacts
 RUN mkdir /app/artifacts/models
 
-COPY artifacts/models/model.pkl /app/artifacts/models/
-COPY src/serve /app/src/serve
+COPY src/train /app/src/train
 
-CMD ["poetry", "run", "python", "src/serve/main.py"]
+CMD ["poetry", "run", "python", "src/train/train.py"]
