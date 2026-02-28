@@ -3,8 +3,10 @@ import numpy as np
 from sklearn.pipeline import Pipeline
 from fastapi import FastAPI
 import uvicorn
+from datetime import datetime
 from pydantic_models import InputPredict, OutputPredict
 from mapping import CLASS_NAMES
+from bq_io import client, table
 
 
 def load_pipeline(path: str) -> Pipeline:
@@ -40,6 +42,24 @@ def predict(input_predict: InputPredict):
         class_idx=class_idx,
         class_name=CLASS_NAMES[class_idx]
     )
+
+    insertion_timestamp = datetime.now()
+    row = {
+        'partition_date': insertion_timestamp.date(),
+        'unique_id': input_predict.unique_id,
+        'input_features': {
+            'sepal_length': input_predict.sepal_length,
+            'sepal_width': input_predict.sepal_width,
+            'petal_length': input_predict.petal_length,
+            'petal_width': input_predict.petal_width,
+        },
+        'output_results': {
+            'class_idx': output.class_idx,
+            'class_name': output.class_name,
+        },
+        'insertion_timestamp': insertion_timestamp,
+    }
+    client.insert_rows(table, [row])
 
     return output
 

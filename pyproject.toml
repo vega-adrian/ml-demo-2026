@@ -24,4 +24,13 @@ build-backend = "poetry.core.masonry.api"
 fastapi = "^0.133.1"
 uvicorn = "^0.41.0"
 pydantic = "^2.12.5"
+google-cloud-bigquery = "^3.40.1"
+
+
+[tool.poetry.group.test.dependencies]
+requests = "^2.32.5"
+
+
+[tool.poetry.group.local.dependencies]
+python-dotenv = "^1.2.1"
 

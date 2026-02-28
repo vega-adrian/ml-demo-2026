@@ -37,7 +37,8 @@ steps:
       "--image=europe-west1-docker.pkg.dev/$PROJECT_ID/ml-models/ml-demo-api:latest",
       "--region=europe-west1",
       "--allow-unauthenticated",
-      "--project=$PROJECT_ID"
+      "--project=$PROJECT_ID",
+      "--set-env-vars=ENV=pro,PROJECT_ID=$PROJECT_ID,DATASET_ID=ml_demo_2026,DATASET_LOCATION=EU,TABLE_ID=predictions"
     ]
 
   - id: 'Update traffic'
